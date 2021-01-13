@@ -1,0 +1,36 @@
+@import 'styles/utils';
+
+.root {
+  width: 100%;
+  padding: 10px 0;
+  background: app-color('white');
+  box-shadow: 0px -1px 2px rgba(58, 58, 68, 0.24),
+    0px -2px 4px rgba(90, 91, 106, 0.24);
+  @include flex-center();
+
+  .container {
+    width: screen-width('large');
+    margin: 0 20px;
+    @include flex-between();
+
+    @media (max-width: screen-width('small')) {
+      flex-direction: column;
+    }
+
+    .logo {
+      font-family: Roboto;
+      color: app-color('blue90');
+      font-size: 30px;
+    }
+
+    .item {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 28px;
+      letter-spacing: 0.2px;
+      color: app-color('gray50');
+    }
+  }
+}

@@ -1,0 +1,113 @@
+@import 'styles/utils';
+
+.root {
+  width: 100%;
+  height: 60px;
+  background: app-color('white');
+  box-shadow: 0px 1px 2px rgba(58, 58, 68, 0.24),
+    0px 2px 4px rgba(90, 91, 106, 0.24);
+  @include flex-center();
+
+  .container {
+    width: screen-width('large');
+    height: 60px;
+    margin: 0 20px;
+    @include flex-between();
+
+    @media (max-width: screen-width('large')) {
+      width: 100%;
+    }
+
+    .logo {
+      font-family: Roboto;
+      color: app-color('blue90');
+      font-size: 30px;
+      @include flex-center();
+
+      img {
+        width: 45px;
+        height: 45px;
+      }
+
+      .title {
+        margin-left: 15px;
+      }
+    }
+
+    .menu {
+      list-style: none;
+      padding-left: 20px;
+      @include flex-center();
+
+      @media (max-width: screen-width('small')) {
+        display: none;
+      }
+
+      .item {
+        height: 40px;
+        padding: 0 20px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        text-align: center;
+        letter-spacing: 0.022em;
+        color: app-color('gray70');
+        border-bottom: 2px solid app-color('transparent');
+        @include flex-center();
+
+        &:hover {
+          color: app-color('blue100');
+        }
+
+        &.active {
+          color: app-color('blue100');
+          border-bottom: 2px solid app-color('blue70');
+        }
+
+        &.logout {
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 114%;
+          border: 1px solid app-color('gray30');
+          box-sizing: border-box;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        // &.signup {
+        //   color: app-color('gray0');
+        //   background: app-color('gray60');
+        //   font-weight: bold;
+        //   font-size: 14px;
+        //   line-height: 114%;
+        //   box-shadow: 0px 2px 4px rgba(58, 58, 68, 0.2),
+        //     0px 4px 8px rgba(90, 91, 106, 0.2);
+        //   border-radius: 4px;
+        //   @include flex-center();
+        // }
+      }
+
+      .space {
+        width: 20px;
+      }
+    }
+
+    .mobile {
+      width: 40px;
+      height: 40px;
+      display: none;
+      color: app-color('gray70');
+      cursor: pointer;
+
+      svg {
+        font-size: 40px;
+      }
+
+      @media (max-width: screen-width('small')) {
+        @include flex-center();
+      }
+    }
+  }
+}

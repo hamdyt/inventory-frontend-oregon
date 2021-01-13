@@ -1,0 +1,29 @@
+@import 'styles/utils';
+
+.root {
+  font-family: Montserrat;
+  @include flex-center-column();
+
+  .title {
+    font-size: 30px;
+    margin-top: 100px;
+  }
+
+  .start {
+    padding: 20px;
+    margin-top: 200px;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 30px;
+    color: app-color('gray70');
+    border: 1px solid app-color('gray30');
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      color: app-color('blue100');
+      border: 1px solid app-color('blue100');
+    }
+  }
+}

@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - yarn
+      - pip install awscli
+  build:
+    commands:
+      - yarn build
+  post_build:
+    commands:
+      - aws s3 sync ./build s3://app.mywebdemoapps.com/ --delete
+      - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths / /* /index.html /manifest.json /favicon.ico /robots.txt /asset-manifest.json

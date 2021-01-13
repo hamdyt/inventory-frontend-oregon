@@ -1,0 +1,7 @@
+@function screen-width($key) {
+  @return map-get($screen-width, $key);
+}
+
+@function app-color($key) {
+  @return map-get($app-color, $key);
+}

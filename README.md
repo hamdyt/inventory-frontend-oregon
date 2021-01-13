@@ -1,2 +1,11 @@
-# inventory-frontend
-This is my first serverless application for deployment on AWS Cloud
+# Inventoryapp Frontend
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Key lib included
+
+- CSS modules
+- node-sass
+- redux
+- redux-pender
+- react-helmet
