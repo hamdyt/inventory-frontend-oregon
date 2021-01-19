@@ -10,6 +10,7 @@ import { actionCreators as productActions } from 'store/modules/product'
 import { actionCreators as orderActions } from 'store/modules/order'
 
 import { setToken } from 'lib/token'
+import progress from 'lib/progress'
 
 class EditOrderContainer extends React.Component {
   // initialize
@@ -26,6 +27,7 @@ class EditOrderContainer extends React.Component {
     await setToken()
 
     try {
+      progress.install()
       OrderActions.setPending(true)
       PlayerActions.setPending(true)
       ProductActions.setPending(true)
@@ -82,10 +84,12 @@ class EditOrderContainer extends React.Component {
       OrderActions.setPending(false)
       PlayerActions.setPending(false)
       ProductActions.setPending(false)
+      progress.uninstall()
     } catch (e) {
       OrderActions.setPending(false)
       PlayerActions.setPending(false)
       ProductActions.setPending(false)
+      progress.uninstall()
     }
   }
 
@@ -111,6 +115,7 @@ class EditOrderContainer extends React.Component {
     const { player, product, number, size, quantity, discount } = form
 
     try {
+      progress.install()
       OrderActions.setPending(true)
       await OrderActions.update({
         id: order.id,
@@ -123,8 +128,10 @@ class EditOrderContainer extends React.Component {
         discount: parseInt(discount, 10)
       })
       OrderActions.setPending(false)
+      progress.uninstall()
     } catch (e) {
       OrderActions.setPending(false)
+      progress.uninstall()
     }
   }
 

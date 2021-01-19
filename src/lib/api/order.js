@@ -1,7 +1,7 @@
 import axios from './defaultClient'
 
 export const create = ({ player, product, number, size, quantity, discount }) =>
-  axios.post('/order', {
+  axios().post('/order', {
     player_id: player,
     product_id: product,
     number,
@@ -10,7 +10,7 @@ export const create = ({ player, product, number, size, quantity, discount }) =>
     discount
   })
 
-export const get = id => axios.get('/order/' + id)
+export const get = id => axios().get('/order/' + id)
 
 export const update = ({
   id,
@@ -22,7 +22,7 @@ export const update = ({
   quantity,
   discount
 }) =>
-  axios.put('/order', {
+  axios().put('/order', {
     id,
     detail_id,
     player_id: player,
@@ -33,4 +33,4 @@ export const update = ({
     discount
   })
 
-export const search = number => axios.get('/order?number=' + number)
+export const search = number => axios().get('/order?number=' + number)

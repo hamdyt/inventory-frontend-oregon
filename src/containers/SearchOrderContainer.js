@@ -7,6 +7,7 @@ import Content from 'components/page/search-order/Content'
 import { actionCreators as orderActions } from 'store/modules/order'
 
 import { setToken } from 'lib/token'
+import progress from 'lib/progress'
 
 class SearchOrderContainer extends React.Component {
   // initialize
@@ -25,11 +26,14 @@ class SearchOrderContainer extends React.Component {
     const { OrderActions } = this.props
 
     try {
+      progress.install()
       OrderActions.setPending(true)
       await OrderActions.search(number)
       OrderActions.setPending(false)
+      progress.uninstall()
     } catch (e) {
       OrderActions.setPending(false)
+      progress.uninstall()
     }
   }
 

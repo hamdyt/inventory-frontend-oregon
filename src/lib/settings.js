@@ -1,6 +1,7 @@
 const config = {
   APP_NAME: 'Inventory',
-  APP_API: 'https://api.mywebdemoapps.com',
+  APP_API_ORDER: 'https://api2-order.mywebdemoapps.com',
+  APP_API_PRODUCT: 'https://api2-product.mywebdemoapps.com',
   PAGE_TEMPLATE: '/template',
   PAGE_HOME: '/',
   PAGE_NEW_ORDER: '/new-order',

@@ -10,6 +10,8 @@ import { actionCreators as productActions } from 'store/modules/product'
 import { actionCreators as orderActions } from 'store/modules/order'
 
 import { setToken } from 'lib/token'
+import progress from 'lib/progress'
+
 class NewOrderContainer extends React.Component {
   // initialize
   initialize = async () => {
@@ -25,6 +27,7 @@ class NewOrderContainer extends React.Component {
 
     // get players
     try {
+      progress.install()
       PlayerActions.setPending(true)
       await PlayerActions.getAll()
       PlayerActions.setPending(false)
@@ -34,12 +37,7 @@ class NewOrderContainer extends React.Component {
       if (players && players.length) {
         OrderActions.changeInput({ name: 'player', value: players[0].id })
       }
-    } catch (e) {
-      PlayerActions.setPending(false)
-    }
 
-    // get products
-    try {
       ProductActions.setPending(true)
       await ProductActions.getAll()
       ProductActions.setPending(false)
@@ -49,8 +47,11 @@ class NewOrderContainer extends React.Component {
       if (products && products.length) {
         OrderActions.changeInput({ name: 'product', value: products[0].id })
       }
+      progress.uninstall()
     } catch (e) {
+      PlayerActions.setPending(false)
       ProductActions.setPending(false)
+      progress.uninstall()
     }
   }
 
@@ -87,6 +88,7 @@ class NewOrderContainer extends React.Component {
     const { player, product, number, size, quantity, discount } = form
 
     try {
+      progress.install()
       OrderActions.setPending(true)
       await OrderActions.create({
         player: parseInt(player, 10),
@@ -97,8 +99,10 @@ class NewOrderContainer extends React.Component {
         discount: parseInt(discount, 10)
       })
       OrderActions.setPending(false)
+      progress.uninstall()
     } catch (e) {
       OrderActions.setPending(false)
+      progress.uninstall()
     }
   }
 

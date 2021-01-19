@@ -21,40 +21,20 @@ function timer() {
   timerId = setTimeout(timer, 50)
 }
 
-export function setup() {
-  defaultClient.interceptors.request.use(req => {
-    if (requests.length === 0) {
-      setProgress(25)
-      timer()
-    }
-    requests.push(req)
-    return req
-  })
-  const responseHandler = res => {
-    setTimeout(() => {
-      requests.pop()
-      if (requests.length === 0) {
-        if (timerId) {
-          clearTimeout(timerId)
-          timerId = null
-        }
-        setProgress(100)
-      }
-    }, 150)
-    return res
+function install() {
+  setProgress(25)
+  timer()
+}
+
+function uninstall() {
+  if (timerId) {
+    clearTimeout(timerId)
+    timerId = null
   }
-  const errorHandler = response => {
-    setTimeout(() => {
-      requests.pop()
-      if (requests.length === 0) {
-        if (timerId) {
-          clearTimeout(timerId)
-          timerId = null
-        }
-        setProgress(100)
-      }
-    }, 150)
-    return Promise.reject(response)
-  }
-  defaultClient.interceptors.response.use(responseHandler, errorHandler)
+  setProgress(100)
+}
+
+export default {
+  install,
+  uninstall
 }

@@ -1,3 +1,3 @@
 import axios from './defaultClient'
 
-export const getAll = () => axios.get('/product')
+export const getAll = () => axios(true).get('/product')

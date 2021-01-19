@@ -4,7 +4,8 @@ import storage from './storage'
 import settings from './settings'
 
 const setToken = async () => {
-  const token = (await Auth.currentSession()).idToken.jwtToken
+  const session = await Auth.currentSession()
+  const token = session.getIdToken().getJwtToken() //.idToken.jwtToken
 
   // store token
   storage.set(settings.APP_TOKEN_KEY, token)

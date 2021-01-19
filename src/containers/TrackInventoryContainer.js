@@ -7,6 +7,7 @@ import Content from 'components/page/track-inventory/Content'
 import { actionCreators as playerActions } from 'store/modules/player'
 
 import { setToken } from 'lib/token'
+import progress from 'lib/progress'
 
 class TrackInventoryContainer extends React.Component {
   // initialize
@@ -21,6 +22,7 @@ class TrackInventoryContainer extends React.Component {
 
     // get players
     try {
+      progress.install()
       PlayerActions.setPending(true)
       await PlayerActions.getAll()
 
@@ -31,8 +33,10 @@ class TrackInventoryContainer extends React.Component {
         await PlayerActions.getOrders(players[0].id)
       }
       PlayerActions.setPending(false)
+      progress.uninstall()
     } catch (e) {
       PlayerActions.setPending(false)
+      progress.uninstall()
     }
   }
 
@@ -45,10 +49,13 @@ class TrackInventoryContainer extends React.Component {
 
     try {
       PlayerActions.setPending(true)
+      progress.install()
       await PlayerActions.getOrders(value)
       PlayerActions.setPending(false)
       PlayerActions.setCurrentPlayer(value)
+      progress.uninstall()
     } catch (e) {
+      progress.uninstall()
       PlayerActions.setPending(false)
     }
   }
