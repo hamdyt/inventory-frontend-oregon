@@ -10,5 +10,5 @@ phases:
       - yarn build
   post_build:
     commands:
-      - aws s3 sync ./build s3://app2.mywebdemoapps.com/ --delete
+      - aws s3 sync ./build s3://app.mywebdemoapps.com/ --delete
       - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths / /* /index.html /manifest.json /favicon.ico /robots.txt /asset-manifest.json
